@@ -1,0 +1,250 @@
+2026-06-28 01:40:21 | INFO | Total Websites : 4
+2026-06-28 01:40:21 | INFO | https://google.com
+2026-06-28 01:40:21 | INFO | https://github.com
+2026-06-28 01:40:21 | INFO | https://openai.com
+2026-06-28 01:40:21 | INFO | https://wordpress.org
+2026-06-28 02:25:54 | INFO | ============================================================
+2026-06-28 02:25:54 | INFO | Website: https://google.com
+2026-06-28 02:25:56 | INFO | Downloaded: https://google.com
+2026-06-28 02:25:56 | INFO | ============================================================
+2026-06-28 02:25:56 | INFO | Website: https://github.com
+2026-06-28 02:26:03 | INFO | Downloaded: https://github.com
+2026-06-28 02:26:03 | INFO | ============================================================
+2026-06-28 02:26:03 | INFO | Website: https://openai.com
+2026-06-28 02:26:04 | INFO | Downloaded: https://openai.com
+2026-06-28 02:26:04 | INFO | ============================================================
+2026-06-28 02:26:04 | INFO | Website: https://wordpress.org
+2026-06-28 02:26:06 | INFO | Downloaded: https://wordpress.org
+2026-06-28 02:28:29 | INFO | ============================================================
+2026-06-28 02:28:29 | INFO | Website : https://google.com
+2026-06-28 02:28:31 | INFO | Downloaded: https://google.com
+2026-06-28 02:28:31 | INFO | Scanning : https://support.google.com/websearch/?p=ws_results_help&hl=en-PK&fg=1
+2026-06-28 02:28:36 | INFO | Downloaded: https://support.google.com/websearch/?p=ws_results_help&hl=en-PK&fg=1
+2026-06-28 02:28:36 | INFO | Scanning : https://about.google/?utm_source=google-PK&utm_medium=referral&utm_campaign=hp-footer&fg=1
+2026-06-28 02:28:37 | INFO | Downloaded: https://about.google/?utm_source=google-PK&utm_medium=referral&utm_campaign=hp-footer&fg=1
+2026-06-28 02:28:37 | INFO | Scanning : https://google.com
+2026-06-28 02:28:39 | INFO | Downloaded: https://google.com
+2026-06-28 02:28:39 | INFO | Scanning : https://www.google.com.pk/intl/en/about/products
+2026-06-28 02:28:41 | INFO | Downloaded: https://www.google.com.pk/intl/en/about/products
+2026-06-28 02:28:41 | INFO | ============================================================
+2026-06-28 02:28:41 | INFO | Website : https://github.com
+2026-06-28 02:28:43 | INFO | Downloaded: https://github.com
+2026-06-28 02:28:43 | INFO | Scanning : https://github.com/enterprise/premium-support
+2026-06-28 02:28:45 | INFO | Downloaded: https://github.com/enterprise/premium-support
+2026-06-28 02:28:45 | INFO | Scanning : https://github.com/premium-support
+2026-06-28 02:28:47 | INFO | Downloaded: https://github.com/premium-support
+2026-06-28 02:28:47 | INFO | Scanning : https://github.com/about
+2026-06-28 02:28:50 | INFO | Downloaded: https://github.com/about
+2026-06-28 02:28:50 | INFO | Scanning : https://support.github.com?tags=dotcom-footer
+2026-06-28 02:28:51 | INFO | Downloaded: https://support.github.com?tags=dotcom-footer
+2026-06-28 02:28:51 | INFO | Scanning : https://github.com/about/diversity
+2026-06-28 02:28:52 | INFO | Downloaded: https://github.com/about/diversity
+2026-06-28 02:28:52 | INFO | Scanning : https://github.com/team
+2026-06-28 02:28:54 | INFO | Downloaded: https://github.com/team
+2026-06-28 02:28:54 | INFO | Scanning : https://docs.github.com/get-started/exploring-integrations/about-building-integrations
+2026-06-28 02:28:56 | INFO | Downloaded: https://docs.github.com/get-started/exploring-integrations/about-building-integrations
+2026-06-28 02:28:57 | INFO | Scanning : https://github.com
+2026-06-28 02:28:58 | INFO | Downloaded: https://github.com
+2026-06-28 02:28:58 | INFO | Scanning : https://support.github.com
+2026-06-28 02:28:59 | INFO | Downloaded: https://support.github.com
+2026-06-28 02:28:59 | INFO | ============================================================
+2026-06-28 02:28:59 | INFO | Website : https://openai.com
+2026-06-28 02:29:00 | INFO | Downloaded: https://openai.com
+2026-06-28 02:29:00 | INFO | Scanning : https://help.openai.com/
+2026-06-28 02:29:02 | INFO | Downloaded: https://help.openai.com/
+2026-06-28 02:29:02 | INFO | Scanning : https://openai.com
+2026-06-28 02:29:03 | INFO | Downloaded: https://openai.com
+2026-06-28 02:29:04 | INFO | Scanning : https://openai.com/about/
+2026-06-28 02:29:06 | INFO | Downloaded: https://openai.com/about/
+2026-06-28 02:29:06 | INFO | Scanning : https://openai.com/contact-sales/
+2026-06-28 02:29:07 | INFO | Downloaded: https://openai.com/contact-sales/
+2026-06-28 02:29:07 | INFO | ============================================================
+2026-06-28 02:29:07 | INFO | Website : https://wordpress.org
+2026-06-28 02:29:12 | INFO | Downloaded: https://wordpress.org
+2026-06-28 02:29:12 | INFO | Scanning : https://wordpress.org/about/privacy/
+2026-06-28 02:29:16 | INFO | Downloaded: https://wordpress.org/about/privacy/
+2026-06-28 02:29:16 | INFO | Scanning : https://wordpress.org/about/
+2026-06-28 02:29:20 | INFO | Downloaded: https://wordpress.org/about/
+2026-06-28 02:29:20 | INFO | Scanning : https://wordpress.org
+2026-06-28 02:29:23 | INFO | Downloaded: https://wordpress.org
+2026-06-28 02:29:23 | INFO | Scanning : https://wordpress.org/support/forums/
+2026-06-28 02:29:27 | INFO | Downloaded: https://wordpress.org/support/forums/
+2026-06-28 02:29:55 | INFO | Found 4 websites.
+2026-06-28 02:29:55 | INFO | ============================================================
+2026-06-28 02:29:55 | INFO | Scanning Website : https://google.com
+2026-06-28 02:29:58 | INFO | Downloaded: https://google.com
+2026-06-28 02:29:58 | INFO | Checking : https://about.google/?utm_source=google-PK&utm_medium=referral&utm_campaign=hp-footer&fg=1
+2026-06-28 02:29:59 | INFO | Downloaded: https://about.google/?utm_source=google-PK&utm_medium=referral&utm_campaign=hp-footer&fg=1
+2026-06-28 02:29:59 | INFO | Checking : https://support.google.com/websearch/?p=ws_results_help&hl=en-PK&fg=1
+2026-06-28 02:30:10 | INFO | Downloaded: https://support.google.com/websearch/?p=ws_results_help&hl=en-PK&fg=1
+2026-06-28 02:30:10 | INFO | Checking : https://www.google.com.pk/intl/en/about/products
+2026-06-28 02:30:12 | INFO | Downloaded: https://www.google.com.pk/intl/en/about/products
+2026-06-28 02:30:12 | INFO | Checking : https://google.com
+2026-06-28 02:30:15 | INFO | Downloaded: https://google.com
+2026-06-28 02:30:15 | INFO | ============================================================
+2026-06-28 02:30:15 | INFO | Scanning Website : https://github.com
+2026-06-28 02:30:17 | INFO | Downloaded: https://github.com
+2026-06-28 02:30:17 | INFO | Checking : https://github.com
+2026-06-28 02:30:25 | INFO | Downloaded: https://github.com
+2026-06-28 02:30:25 | INFO | Checking : https://github.com/premium-support
+2026-06-28 02:30:27 | INFO | Downloaded: https://github.com/premium-support
+2026-06-28 02:30:27 | INFO | Checking : https://github.com/about/diversity
+2026-06-28 02:30:28 | INFO | Downloaded: https://github.com/about/diversity
+2026-06-28 02:30:28 | INFO | Checking : https://github.com/about
+2026-06-28 02:30:30 | INFO | Downloaded: https://github.com/about
+2026-06-28 02:30:30 | INFO | Checking : https://github.com/team
+2026-06-28 02:30:32 | INFO | Downloaded: https://github.com/team
+2026-06-28 02:30:33 | INFO | Checking : https://docs.github.com/get-started/exploring-integrations/about-building-integrations
+2026-06-28 02:30:33 | INFO | Downloaded: https://docs.github.com/get-started/exploring-integrations/about-building-integrations
+2026-06-28 02:30:33 | INFO | Checking : https://support.github.com?tags=dotcom-footer
+2026-06-28 02:30:41 | INFO | Downloaded: https://support.github.com?tags=dotcom-footer
+2026-06-28 02:30:41 | INFO | Checking : https://github.com/enterprise/premium-support
+2026-06-28 02:30:45 | INFO | Downloaded: https://github.com/enterprise/premium-support
+2026-06-28 02:30:45 | INFO | Checking : https://support.github.com
+2026-06-28 02:30:46 | INFO | Downloaded: https://support.github.com
+2026-06-28 02:30:46 | INFO | ============================================================
+2026-06-28 02:30:46 | INFO | Scanning Website : https://openai.com
+2026-06-28 02:30:48 | INFO | Downloaded: https://openai.com
+2026-06-28 02:30:48 | INFO | Checking : https://help.openai.com/
+2026-06-28 02:30:55 | INFO | Downloaded: https://help.openai.com/
+2026-06-28 02:30:55 | INFO | Checking : https://openai.com/contact-sales/
+2026-06-28 02:30:56 | INFO | Downloaded: https://openai.com/contact-sales/
+2026-06-28 02:30:56 | INFO | Checking : https://openai.com
+2026-06-28 02:30:57 | INFO | Downloaded: https://openai.com
+2026-06-28 02:30:57 | INFO | Checking : https://openai.com/about/
+2026-06-28 02:30:58 | INFO | Downloaded: https://openai.com/about/
+2026-06-28 02:30:58 | INFO | ============================================================
+2026-06-28 02:30:58 | INFO | Scanning Website : https://wordpress.org
+2026-06-28 02:31:05 | INFO | Downloaded: https://wordpress.org
+2026-06-28 02:31:05 | INFO | Checking : https://wordpress.org/about/privacy/
+2026-06-28 02:31:09 | INFO | Downloaded: https://wordpress.org/about/privacy/
+2026-06-28 02:31:09 | INFO | Checking : https://wordpress.org/support/forums/
+2026-06-28 02:31:12 | INFO | Downloaded: https://wordpress.org/support/forums/
+2026-06-28 02:31:12 | INFO | Checking : https://wordpress.org/about/
+2026-06-28 02:31:15 | INFO | Downloaded: https://wordpress.org/about/
+2026-06-28 02:31:15 | INFO | Checking : https://wordpress.org
+2026-06-28 02:31:19 | INFO | Downloaded: https://wordpress.org
+2026-06-28 02:59:56 | INFO | Found 4 websites.
+2026-06-28 02:59:56 | INFO | ============================================================
+2026-06-28 02:59:56 | INFO | Scanning Website : https://google.com
+2026-06-28 02:59:59 | INFO | Downloaded: https://google.com
+2026-06-28 02:59:59 | INFO | Checking : https://support.google.com/websearch/?p=ws_results_help&hl=en-PK&fg=1
+2026-06-28 03:00:05 | INFO | Downloaded: https://support.google.com/websearch/?p=ws_results_help&hl=en-PK&fg=1
+2026-06-28 03:00:05 | INFO | Checking : https://about.google/?utm_source=google-PK&utm_medium=referral&utm_campaign=hp-footer&fg=1
+2026-06-28 03:00:06 | INFO | Downloaded: https://about.google/?utm_source=google-PK&utm_medium=referral&utm_campaign=hp-footer&fg=1
+2026-06-28 03:00:06 | INFO | Checking : https://google.com
+2026-06-28 03:00:09 | INFO | Downloaded: https://google.com
+2026-06-28 03:00:09 | INFO | Checking : https://www.google.com.pk/intl/en/about/products
+2026-06-28 03:00:11 | INFO | Downloaded: https://www.google.com.pk/intl/en/about/products
+2026-06-28 03:00:11 | INFO | ============================================================
+2026-06-28 03:00:11 | INFO | Scanning Website : https://github.com
+2026-06-28 03:00:17 | INFO | Downloaded: https://github.com
+2026-06-28 03:00:17 | INFO | Checking : https://github.com
+2026-06-28 03:00:22 | INFO | Downloaded: https://github.com
+2026-06-28 03:00:22 | INFO | Checking : https://github.com/about
+2026-06-28 03:00:24 | INFO | Downloaded: https://github.com/about
+2026-06-28 03:00:24 | INFO | Checking : https://support.github.com?tags=dotcom-footer
+2026-06-28 03:00:25 | INFO | Downloaded: https://support.github.com?tags=dotcom-footer
+2026-06-28 03:00:25 | INFO | Checking : https://github.com/about/diversity
+2026-06-28 03:00:28 | INFO | Downloaded: https://github.com/about/diversity
+2026-06-28 03:00:28 | INFO | Checking : https://github.com/premium-support
+2026-06-28 03:00:31 | INFO | Downloaded: https://github.com/premium-support
+2026-06-28 03:00:31 | INFO | Checking : https://support.github.com
+2026-06-28 03:00:32 | INFO | Downloaded: https://support.github.com
+2026-06-28 03:00:32 | INFO | Checking : https://github.com/enterprise/premium-support
+2026-06-28 03:00:38 | INFO | Downloaded: https://github.com/enterprise/premium-support
+2026-06-28 03:00:38 | INFO | Checking : https://docs.github.com/get-started/exploring-integrations/about-building-integrations
+2026-06-28 03:00:39 | INFO | Downloaded: https://docs.github.com/get-started/exploring-integrations/about-building-integrations
+2026-06-28 03:00:39 | INFO | Checking : https://github.com/team
+2026-06-28 03:00:40 | INFO | Downloaded: https://github.com/team
+2026-06-28 03:00:40 | INFO | ============================================================
+2026-06-28 03:00:40 | INFO | Scanning Website : https://openai.com
+2026-06-28 03:00:42 | INFO | Downloaded: https://openai.com
+2026-06-28 03:00:42 | INFO | Checking : https://openai.com
+2026-06-28 03:00:43 | INFO | Downloaded: https://openai.com
+2026-06-28 03:00:43 | INFO | Checking : https://openai.com/contact-sales/
+2026-06-28 03:00:44 | INFO | Downloaded: https://openai.com/contact-sales/
+2026-06-28 03:00:44 | INFO | Checking : https://help.openai.com/
+2026-06-28 03:00:46 | INFO | Downloaded: https://help.openai.com/
+2026-06-28 03:00:46 | INFO | Checking : https://openai.com/about/
+2026-06-28 03:00:47 | INFO | Downloaded: https://openai.com/about/
+2026-06-28 03:00:47 | INFO | ============================================================
+2026-06-28 03:00:47 | INFO | Scanning Website : https://wordpress.org
+2026-06-28 03:00:51 | INFO | Downloaded: https://wordpress.org
+2026-06-28 03:00:51 | INFO | Checking : https://wordpress.org/about/privacy/
+2026-06-28 03:00:54 | INFO | Downloaded: https://wordpress.org/about/privacy/
+2026-06-28 03:00:54 | INFO | Checking : https://wordpress.org
+2026-06-28 03:00:59 | INFO | Downloaded: https://wordpress.org
+2026-06-28 03:00:59 | INFO | Checking : https://wordpress.org/about/
+2026-06-28 03:01:03 | INFO | Downloaded: https://wordpress.org/about/
+2026-06-28 03:01:03 | INFO | Checking : https://wordpress.org/support/forums/
+2026-06-28 03:01:06 | INFO | Downloaded: https://wordpress.org/support/forums/
+2026-06-28 03:02:15 | INFO | Found 4 websites.
+2026-06-28 03:02:15 | INFO | ============================================================
+2026-06-28 03:02:15 | INFO | Scanning Website : https://www.tensarcorp.com
+2026-06-28 03:02:18 | INFO | Downloaded: https://www.tensarcorp.com
+2026-06-28 03:02:18 | INFO | Checking : https://www.tensarcorp.com/support
+2026-06-28 03:02:19 | INFO | Downloaded: https://www.tensarcorp.com/support
+2026-06-28 03:02:19 | INFO | Checking : https://www.tensarcorp.com/solutions/design-support
+2026-06-28 03:02:22 | INFO | Downloaded: https://www.tensarcorp.com/solutions/design-support
+2026-06-28 03:02:22 | INFO | Checking : https://www.tensarcorp.com/about-tensar-corporation
+2026-06-28 03:02:24 | INFO | Downloaded: https://www.tensarcorp.com/about-tensar-corporation
+2026-06-28 03:02:24 | INFO | Checking : https://www.tensarcorp.com/applications/underground-mining-support
+2026-06-28 03:02:25 | INFO | Downloaded: https://www.tensarcorp.com/applications/underground-mining-support
+2026-06-28 03:02:26 | INFO | Checking : https://www.tensarcorp.com/applications/structure-foundation-support
+2026-06-28 03:02:27 | INFO | Downloaded: https://www.tensarcorp.com/applications/structure-foundation-support
+2026-06-28 03:02:27 | INFO | Checking : https://www.tensarcorp.com
+2026-06-28 03:02:30 | INFO | Downloaded: https://www.tensarcorp.com
+2026-06-28 03:02:30 | INFO | Checking : https://www.tensarcorp.com/solutions/design-support/tensar-plus-design-software
+2026-06-28 03:02:31 | INFO | Downloaded: https://www.tensarcorp.com/solutions/design-support/tensar-plus-design-software
+2026-06-28 03:02:31 | INFO | ============================================================
+2026-06-28 03:02:31 | INFO | Scanning Website : https://www.constructconnect.com
+2026-06-28 03:02:32 | INFO | Downloaded: https://www.constructconnect.com
+2026-06-28 03:02:32 | INFO | Checking : https://www.constructconnect.com/contact-us
+2026-06-28 03:02:34 | INFO | Downloaded: https://www.constructconnect.com/contact-us
+2026-06-28 03:02:34 | INFO | Checking : https://www.constructconnect.com/blog/how-ai-preconstruction-tools-help-contractors-bid-faster-during-building-season
+2026-06-28 03:02:35 | INFO | Downloaded: https://www.constructconnect.com/blog/how-ai-preconstruction-tools-help-contractors-bid-faster-during-building-season
+2026-06-28 03:02:35 | INFO | Checking : https://help.constructconnect.com/
+2026-06-28 03:02:40 | INFO | Downloaded: https://help.constructconnect.com/
+2026-06-28 03:02:40 | INFO | Checking : https://www.constructconnect.com/company/executive-leadership-team
+2026-06-28 03:02:43 | INFO | Downloaded: https://www.constructconnect.com/company/executive-leadership-team
+2026-06-28 03:02:43 | INFO | Checking : https://www.constructconnect.com
+2026-06-28 03:02:43 | INFO | Downloaded: https://www.constructconnect.com
+2026-06-28 03:02:43 | INFO | Checking : https://www.constructconnect.com/blog/still-on-the-fence-about-constructconnect-project-intelligence-lets-address-4-common-concerns
+2026-06-28 03:02:45 | INFO | Downloaded: https://www.constructconnect.com/blog/still-on-the-fence-about-constructconnect-project-intelligence-lets-address-4-common-concerns
+2026-06-28 03:02:45 | INFO | Checking : https://www.constructconnect.com/blog/what-construction-experts-are-warning-about-the-industry-and-what-contractors-should-do-about-it
+2026-06-28 03:02:47 | INFO | Downloaded: https://www.constructconnect.com/blog/what-construction-experts-are-warning-about-the-industry-and-what-contractors-should-do-about-it
+2026-06-28 03:02:47 | INFO | ============================================================
+2026-06-28 03:02:47 | INFO | Scanning Website : https://www.arcadis.com
+2026-06-28 03:02:50 | INFO | Downloaded: https://www.arcadis.com
+2026-06-28 03:02:50 | INFO | Checking : https://www.arcadis.com
+2026-06-28 03:02:52 | INFO | Downloaded: https://www.arcadis.com
+2026-06-28 03:02:52 | INFO | Checking : https://www.arcadis.com/en/contact-us/
+2026-06-28 03:02:53 | INFO | Downloaded: https://www.arcadis.com/en/contact-us/
+2026-06-28 03:02:53 | INFO | Checking : https://www.arcadis.com/en/about-us/business-practices/
+2026-06-28 03:02:56 | INFO | Downloaded: https://www.arcadis.com/en/about-us/business-practices/
+2026-06-28 03:02:56 | INFO | Checking : https://www.arcadis.com/en/about-us/governance/
+2026-06-28 03:02:58 | INFO | Downloaded: https://www.arcadis.com/en/about-us/governance/
+2026-06-28 03:02:58 | INFO | Checking : https://www.arcadis.com/en/about-us/leadership/
+2026-06-28 03:02:59 | INFO | Downloaded: https://www.arcadis.com/en/about-us/leadership/
+2026-06-28 03:02:59 | INFO | Checking : https://www.arcadis.com/en/about-us/awards/
+2026-06-28 03:03:01 | INFO | Downloaded: https://www.arcadis.com/en/about-us/awards/
+2026-06-28 03:03:01 | INFO | Checking : https://www.arcadis.com/en/about-us/business-practices/procurement/
+2026-06-28 03:03:05 | INFO | Downloaded: https://www.arcadis.com/en/about-us/business-practices/procurement/
+2026-06-28 03:03:05 | INFO | Checking : https://www.arcadis.com/en/about-us/
+2026-06-28 03:03:06 | INFO | Downloaded: https://www.arcadis.com/en/about-us/
+2026-06-28 03:03:06 | INFO | ============================================================
+2026-06-28 03:03:06 | INFO | Scanning Website : https://www.conexpoconagg.com
+2026-06-28 03:03:11 | INFO | Downloaded: https://www.conexpoconagg.com
+2026-06-28 03:03:11 | INFO | Checking : https://www.conexpoconagg.com/supporting-organizations
+2026-06-28 03:03:14 | INFO | Downloaded: https://www.conexpoconagg.com/supporting-organizations
+2026-06-28 03:03:14 | INFO | Checking : https://www.conexpoconagg.com/supporting-publications
+2026-06-28 03:03:21 | INFO | Downloaded: https://www.conexpoconagg.com/supporting-publications
+2026-06-28 03:03:21 | INFO | Checking : https://www.conexpoconagg.com/press/media-contacts
+2026-06-28 03:03:23 | INFO | Downloaded: https://www.conexpoconagg.com/press/media-contacts
+2026-06-28 03:03:23 | INFO | Checking : https://www.conexpoconagg.com
+2026-06-28 03:03:28 | INFO | Downloaded: https://www.conexpoconagg.com
+2026-06-28 03:03:28 | INFO | Checking : https://www.conexpoconagg.com/supporting-podcasts
+2026-06-28 03:03:29 | INFO | Downloaded: https://www.conexpoconagg.com/supporting-podcasts
+2026-06-28 03:03:29 | INFO | Checking : https://www.conexpoconagg.com/contact-us
+2026-06-28 03:03:33 | INFO | Downloaded: https://www.conexpoconagg.com/contact-us
