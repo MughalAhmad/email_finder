@@ -5,6 +5,7 @@ from utils.logger import get_logger
 from utils.crawler import WebsiteCrawler
 from utils.extractor import EmailExtractor
 from utils.csv_writer import CSVWriter
+from utils.email_verifier import EmailVerifier
 
 logger = get_logger()
 
@@ -16,6 +17,7 @@ logger.info(f"Found {len(websites)} websites.")
 
 crawler = WebsiteCrawler(logger)
 extractor = EmailExtractor()
+verifier = EmailVerifier()
 writer = CSVWriter(OUTPUT_FILE)
 
 for website in websites:
@@ -42,7 +44,8 @@ for website in websites:
 
     writer.write(
         website,
-        all_emails
+        all_emails,
+        verifier
     )
 
     print("\n-----------------------------------------")
@@ -52,8 +55,14 @@ for website in websites:
 
         print("Emails Found:")
 
+        # for email in sorted(all_emails):
+        #     print(f"   {email}")
         for email in sorted(all_emails):
-            print(f"   {email}")
+
+            if verifier.verify(email):
+                print(f"✅ {email}")
+            else:
+                print(f"❌ {email}")
 
     else:
 

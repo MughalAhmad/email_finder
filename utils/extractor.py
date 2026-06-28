@@ -4,12 +4,15 @@ import re
 from bs4 import BeautifulSoup
 from config import IGNORE_EMAILS
 from utils.validator import EmailValidator
+from utils.email_verifier import EmailVerifier
 
 class EmailExtractor:
 
     def __init__(self):
 
         self.validator = EmailValidator()
+
+        self.verifier = EmailVerifier()
 
         # Email regex
         self.email_pattern = re.compile(
@@ -59,7 +62,16 @@ class EmailExtractor:
         # 3. Remove fake emails
         # -------------------------
 
-        return self.validator.clean(emails)
+        valid_emails = []
+
+        for email in self.validator.clean(emails):
+
+            if self.verifier.verify(email):
+                valid_emails.append(email)
+
+        return sorted(valid_emails)
+
+        # return self.validator.clean(emails)
     
         # cleaned = set()
 
