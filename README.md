@@ -12,16 +12,7 @@ python --version
 
 ---
 
-## Step 2: Create the Project
-
-```bash
-mkdir email-finder
-cd email-finder
-```
-
----
-
-## Step 3: Create a Virtual Environment
+## Step 2: Create a Virtual Environment
 
 ### Windows
 
@@ -53,7 +44,7 @@ source venv/bin/activate
 
 ---
 
-## Step 4: Install Dependencies
+## Step 3: Install Dependencies
 
 Create a file named **requirements.txt** and add the following packages:
 
@@ -74,7 +65,7 @@ pip install -r requirements.txt
 
 ---
 
-## Step 5: Create the Input File
+## Step 4: Create the Input File
 
 Create a file named **input.txt** and add one website per line:
 
@@ -89,12 +80,4 @@ wordpress.org
 
 ## You're Ready!
 
-Your project structure should now look like this:
-
-```
-email-finder/
-│── venv/
-│── requirements.txt
-│── input.txt
-└── app.py
-```
+Best Of Lucks
