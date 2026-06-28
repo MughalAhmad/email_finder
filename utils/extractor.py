@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from config import IGNORE_EMAILS
 from utils.validator import EmailValidator
 from utils.email_verifier import EmailVerifier
-
+from utils.cloudflare_decoder import CloudflareDecoder
 class EmailExtractor:
 
     def __init__(self):
@@ -29,6 +29,10 @@ class EmailExtractor:
             return []
 
         emails = set()
+
+        # Save the downloaded HTML for debugging
+        with open("debug.html", "w", encoding="utf-8") as f:
+            f.write(html)
 
         # -------------------------
         # 1. Extract with Regex
@@ -59,7 +63,23 @@ class EmailExtractor:
                     emails.add(email)
 
         # -------------------------
-        # 3. Remove fake emails
+        # 3. Decode Cloudflare Emails
+        # -------------------------
+
+        for tag in soup.select(".__cf_email__"):
+
+            cfemail = tag.get("data-cfemail")
+
+            if not cfemail:
+                continue
+
+            email = CloudflareDecoder.decode(cfemail)
+
+            if email:
+                emails.add(email)
+
+        # -------------------------
+        # 4. Remove fake emails
         # -------------------------
 
         valid_emails = []

@@ -5,3 +5,4 @@ pandas
 tldextract
 tqdm
 dnspython
+curl_cffi

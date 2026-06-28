@@ -1,8 +1,11 @@
 # utils/crawler.py
 
-import requests
+# import requests
+from curl_cffi import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+import time
+import random
 
 from config import (
     REQUEST_TIMEOUT,
@@ -14,22 +17,65 @@ from config import (
 
 class WebsiteCrawler:
 
+    # def __init__(self, logger):
+    #     self.logger = logger
+
     def __init__(self, logger):
+
         self.logger = logger
+
+        self.session = requests.Session()
+
+        self.session.headers.update(HEADERS)
+
+    # def download_page(self, url):
+    #     """
+    #     Download a webpage.
+    #     Returns HTML if successful.
+    #     """
+
+    #     for attempt in range(MAX_RETRIES):
+
+    #         try:
+
+    #             response = requests.get(
+    #                 url,
+    #                 headers=HEADERS,
+    #                 timeout=REQUEST_TIMEOUT,
+    #                 allow_redirects=True,
+    #             )
+
+    #             if response.status_code == 200:
+
+    #                 self.logger.info(f"Downloaded: {url}")
+
+    #                 return response.text
+
+    #             self.logger.warning(
+    #                 f"{url} returned status {response.status_code}"
+    #             )
+
+    #         except Exception as ex:
+
+    #             self.logger.error(f"{url} -> {ex}")
+
+    #     return None
 
     def download_page(self, url):
         """
-        Download a webpage.
-        Returns HTML if successful.
+        Download webpage using a browser-like TLS fingerprint.
         """
 
         for attempt in range(MAX_RETRIES):
 
             try:
 
-                response = requests.get(
+                # Wait between requests (0.8 - 2 seconds)
+                time.sleep(random.uniform(0.8, 2))
+
+                response = self.session.get(
                     url,
-                    headers=HEADERS,
+                    impersonate="chrome136",
                     timeout=REQUEST_TIMEOUT,
                     allow_redirects=True,
                 )
