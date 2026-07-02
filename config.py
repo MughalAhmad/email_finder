@@ -39,6 +39,9 @@ CONTACT_KEYWORDS = [
     "team",
     "support",
     "help",
+
+    "kontakt-antyweb",
+    "kontakt"
 ]
 
 # Ignore Emails

@@ -19,11 +19,14 @@ crawler = WebsiteCrawler(logger)
 extractor = EmailExtractor()
 verifier = EmailVerifier()
 writer = CSVWriter(OUTPUT_FILE)
+count = 1
 
 for website in websites:
 
     logger.info("=" * 60)
     logger.info(f"Scanning Website : {website}")
+
+    logger.info(f"Currently scanning website and Number : {count}/{len(websites)} - {website}")
 
     pages = crawler.crawl(website)
 
@@ -67,6 +70,8 @@ for website in websites:
     else:
 
         print("No email found.")
+
+    count += 1
 
 print("\n")
 print("=" * 60)
