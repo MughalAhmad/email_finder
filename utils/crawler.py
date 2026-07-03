@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 import time
 import random
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from config import (
     REQUEST_TIMEOUT,
@@ -96,6 +97,84 @@ class WebsiteCrawler:
 
         return None
 
+    def download_page_worker(self, url):
+        """
+        Each worker creates its own Session.
+        This avoids sharing one Session across threads.
+        """
+
+        session = requests.Session()
+        session.headers.update(HEADERS)
+
+        for attempt in range(MAX_RETRIES):
+
+            try:
+
+                time.sleep(random.uniform(0.2, 0.5))
+
+                response = session.get(
+                    url,
+                    impersonate="chrome136",
+                    timeout=REQUEST_TIMEOUT,
+                    allow_redirects=True,
+                )
+
+                if response.status_code == 200:
+
+                    self.logger.info(f"Downloaded: {url}")
+
+                    return response.text
+
+                self.logger.warning(
+                    f"{url} returned status {response.status_code}"
+                )
+
+            except Exception as ex:
+
+                self.logger.error(f"{url} -> {ex}")
+
+        return None
+    
+    def download_pages(self, pages, max_workers=5):
+        """
+        Download multiple pages concurrently.
+        Returns:
+            {
+                url: html,
+                ...
+            }
+        """
+
+        results = {}
+
+        if not pages:
+            return results
+
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+
+            future_map = {
+                executor.submit(self.download_page_worker, page): page
+                for page in pages
+            }
+
+            for future in as_completed(future_map):
+
+                page = future_map[future]
+
+                try:
+
+                    html = future.result()
+
+                    results[page] = html
+
+                except Exception as ex:
+
+                    self.logger.error(f"{page} -> {ex}")
+
+                    results[page] = None
+
+        return results
+
     def find_contact_pages(self, base_url, html):
         """
         Find internal contact/about pages.
@@ -144,4 +223,7 @@ class WebsiteCrawler:
             html,
         )
 
-        return pages
+        return pages, html
+    
+    
+    

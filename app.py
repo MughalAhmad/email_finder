@@ -103,6 +103,8 @@ csv_lock = Lock()
 print_lock = Lock()
 
 writer = CSVWriter(OUTPUT_FILE)
+verifier = EmailVerifier()
+
 
 # -------------------------------------------------------
 # Process Single Website
@@ -116,22 +118,59 @@ def process_website(website):
     # Create separate objects for each thread
     crawler = WebsiteCrawler(logger)
     extractor = EmailExtractor()
-    verifier = EmailVerifier()
 
     logger.info("=" * 60)
     logger.info(f"Scanning Website : {website}")
 
     try:
 
-        pages = crawler.crawl(website)
+        # pages = crawler.crawl(website)
+        pages, homepage_html = crawler.crawl(website)
+
+        # all_emails = set()
+
+        # for page in pages:
+
+        #     logger.info(f"Checking : {page}")
+
+        #     html = crawler.download_page(page)
+
+        #     if not html:
+        #         continue
+
+        #     emails = extractor.extract_from_html(html)
+
+        #     all_emails.update(emails)
 
         all_emails = set()
 
-        for page in pages:
+        # ---------------------------------------
+        # Scan homepage (already downloaded)
+        # ---------------------------------------
+
+        if homepage_html:
+
+            logger.info(f"Checking : {website}")
+
+            emails = extractor.extract_from_html(homepage_html)
+
+            all_emails.update(emails)
+
+        # ---------------------------------------
+        # Remove homepage from pages
+        # ---------------------------------------
+
+        pages = [page for page in pages if page != website]
+
+        # ---------------------------------------
+        # Download remaining pages concurrently
+        # ---------------------------------------
+
+        downloaded_pages = crawler.download_pages(pages, max_workers=min(5, len(pages)))
+
+        for page, html in downloaded_pages.items():
 
             logger.info(f"Checking : {page}")
-
-            html = crawler.download_page(page)
 
             if not html:
                 continue
