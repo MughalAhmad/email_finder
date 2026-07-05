@@ -25,8 +25,8 @@ HEADERS = {
 }
 
 # Input / Output
-INPUT_FILE = "input.txt"
-OUTPUT_FILE = "output.csv"
+INPUT_FILE = "python/input.txt"
+OUTPUT_FILE = "python/output.csv"
 
 # Contact Pages
 CONTACT_KEYWORDS = [

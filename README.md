@@ -81,3 +81,10 @@ wordpress.org
 ## You're Ready!
 
 Best Of Lucks
+
+
+
+
+
+
+pip install fastapi uvicorn
