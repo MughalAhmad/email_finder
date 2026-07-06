@@ -1,9 +1,5 @@
 @echo off
 
-:: ===========================
-:: Setup Python
-:: ===========================
-
 cd python
 
 if not exist venv (
@@ -18,15 +14,10 @@ pip install -r requirements.txt
 
 cd ..
 
-:: ===========================
-:: Setup Node.js
-:: ===========================
-
 echo Checking Node dependencies...
-npm install
+call npm install
 
-:: ===========================
-:: Start Application
-:: ===========================
+echo Starting application...
+call npm run dev
 
-npm run dev
+pause
