@@ -6,5 +6,5 @@ python/output.csv
 python/__pycache__/
 python/logs
 
-.env
+# .env
 

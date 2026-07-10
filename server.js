@@ -1,3 +1,7 @@
+// Add this at the VERY TOP of your server.js
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first'); // Force IPv4 resolution
+
 require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
@@ -7,6 +11,7 @@ const dataBaseconfig = require('./config/database');
 
 const errorHandler = require('./middleware/errorHandler');
 const findEmailRoute = require("./routes/findEmailRoute");
+const templateRoute = require("./routes/templateRoute");
 const authRoute = require("./routes/authRoute");
 
 
@@ -23,6 +28,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(morgan('dev'));
 
 app.use("/api/v1/findEmail", findEmailRoute);
+app.use("/api/v1/template", templateRoute);
 app.use("/api/v1/auth", authRoute);
 
 app.use(errorHandler);
@@ -42,9 +48,9 @@ app.listen(PORT, async () => {
         console.log(`🚀 Server running on http://localhost:${PORT}`);
   console.log(`📚 API Documentation: http://localhost:${PORT}/api/v1/docs`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV}`);
-        // const { err } = await dataBaseconfig();
+        const { err } = await dataBaseconfig();
         // startCronJob();
-        // if (err) throw new Error(err)
+        if (err) throw new Error(err)
     } catch (ex) {
         console.log('Database Connection Error:', ex);
     }
