@@ -245,6 +245,7 @@ async function createDefaultUser() {
             password: "Ics.43719",
             isActive: true,
             role: 'superAdmin',
+            appPassword: '',
             updatedAt: new Date(),
             createdAt: new Date(),
         };

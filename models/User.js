@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default:'user'
     },
+    appPassword:{
+        type: String,
+        required: false
+    },
     createdAt: {
         type: Date,
         default: Date.now

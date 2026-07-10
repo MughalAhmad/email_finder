@@ -10,7 +10,7 @@ const morgan = require('morgan');
 const dataBaseconfig = require('./config/database');
 
 const errorHandler = require('./middleware/errorHandler');
-const findEmailRoute = require("./routes/findEmailRoute");
+const emailRoute = require("./routes/emailRoute");
 const templateRoute = require("./routes/templateRoute");
 const authRoute = require("./routes/authRoute");
 
@@ -27,7 +27,7 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(morgan('dev'));
 
-app.use("/api/v1/findEmail", findEmailRoute);
+app.use("/api/v1/email", emailRoute);
 app.use("/api/v1/template", templateRoute);
 app.use("/api/v1/auth", authRoute);
 
