@@ -279,12 +279,21 @@ module.exports = {
           }
         }
 
-      let user = await User.findOne({_id: req.user.id});
+        try {
+          const user = await User.findById(req.user.id);
+          if (!user) throw new Error('User not found');
 
-      user.domains = user.domains + websites.length;
-      user.emails = user.emails + finalResults.map((item)=>{if(item.totalEmails > 0){count ++}});
+          const validWebsites = websites?.length || 0;
+          const validEmails = finalResults?.filter(item => item.totalEmails > 0).length || 0;
 
-      await user.save();
+          user.domains = (user.domains || 0) + validWebsites;
+          user.emails = (user.emails || 0) + validEmails;
+
+          await user.save();
+        } catch (error) {
+          console.error('Error updating user stats:', error);
+          throw error;
+        }
 
         res.json({
           success: true,
@@ -488,7 +497,7 @@ module.exports = {
 
       // ============ EMAIL COUNT UPDATE ============
 
-      user.sends = user.sends + recipientResults.totalValid;
+      user.sendEmails = user.sendEmails + recipientResults.totalValid;
 
       await user.save();
 
