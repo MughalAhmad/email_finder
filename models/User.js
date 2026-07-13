@@ -32,6 +32,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    domains:{
+        type: Number,
+        default: 0
+    },
+    emails:{
+        type: Number,
+        default: 0
+    },
+    sendEmails:{
+        type: Number,
+        default: 0
+    },
     lastLogin: {
         type: Date
     }

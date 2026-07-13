@@ -26,7 +26,7 @@ const dataBaseConfig = async () => {
         console.log(`📊 Database: ${data.connection.name}`);
         console.log(`📍 Host: ${data.connection.host}`);
         
-        await createDefaultUser();
+        // await createDefaultUser();
         return { err: null };
         
     } catch (err) {

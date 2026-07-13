@@ -12,6 +12,7 @@ const dataBaseconfig = require('./config/database');
 const errorHandler = require('./middleware/errorHandler');
 const emailRoute = require("./routes/emailRoute");
 const templateRoute = require("./routes/templateRoute");
+const dashboardRoute = require("./routes/dashboardRoute");
 const authRoute = require("./routes/authRoute");
 
 
@@ -29,6 +30,7 @@ app.use(morgan('dev'));
 
 app.use("/api/v1/email", emailRoute);
 app.use("/api/v1/template", templateRoute);
+app.use("/api/v1/dashboard", dashboardRoute);
 app.use("/api/v1/auth", authRoute);
 
 app.use(errorHandler);

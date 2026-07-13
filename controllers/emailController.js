@@ -279,6 +279,13 @@ module.exports = {
           }
         }
 
+      let user = await User.findOne({_id: req.user.id});
+
+      user.domains = user.domains + websites.length;
+      user.emails = user.emails + finalResults.map((item)=>{if(item.totalEmails > 0){count ++}});
+
+      await user.save();
+
         res.json({
           success: true,
           total: finalResults.length,
@@ -478,6 +485,12 @@ module.exports = {
           results: results
         });
       }
+
+      // ============ EMAIL COUNT UPDATE ============
+
+      user.sends = user.sends + recipientResults.totalValid;
+
+      await user.save();
 
       // ============ RESPONSE ============
 

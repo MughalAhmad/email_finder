@@ -168,7 +168,7 @@ module.exports = {
   dropdown1: async (req, res, next) => {
     try {
 
-      const templates = await Template.find({}, { title: 1 });
+      const templates = await Template.find({userId: req.user.id}, { title: 1 });
 
       if (!templates) {
         return res.status(404).json({
