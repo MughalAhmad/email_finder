@@ -5,6 +5,13 @@ const Template = require("../models/Template");
 const nodemailer = require('nodemailer');
 const User = require('../models/User');
 
+// Define role limits
+const ROLE_LIMITS = {
+  'user': 25,
+  'admin': 35,
+  'superAdmin': 50
+};
+
 function runPython(websites) {
   return new Promise((resolve, reject) => {
     const pythonScriptPath = path.join(__dirname, "../python/app.py");
@@ -250,67 +257,406 @@ const distributeTemplatesEvenly = (templates, recipients) => {
 };
 
 module.exports = {
+  // getEmails: async (req, res, next) => {
+  //   try {
+  //     const websites = req.body.domains;
+
+  //     if (!Array.isArray(websites) || websites.length === 0) {
+  //       return res.status(400).json({
+  //         success: false,
+  //         message: "Please provide websites array.",
+  //       });
+  //     }
+
+  //     const BATCH_SIZE = 50;
+  //     const batches = [];
+
+  //     for (let i = 0; i < websites.length; i += BATCH_SIZE) {
+  //       batches.push(websites.slice(i, i + BATCH_SIZE));
+  //     }
+
+  //     let finalResults = [];
+
+  //     try {
+  //       for (const batch of batches) {
+  //         console.log(`Processing Batch (${batch.length} websites)...`);
+  //         const batchResult = await runPython(batch);
+  //         if (batchResult.results) {
+  //           finalResults.push(...batchResult.results);
+  //         }
+  //       }
+
+  //       try {
+  //         const user = await User.findById(req.user.id);
+  //         if (!user) throw new Error('User not found');
+
+  //         const validWebsites = websites?.length || 0;
+  //         const validEmails = finalResults?.filter(item => item.totalEmails > 0).length || 0;
+
+  //         user.domains = (user.domains || 0) + validWebsites;
+  //         user.emails = (user.emails || 0) + validEmails;
+
+  //         await user.save();
+  //       } catch (error) {
+  //         console.error('Error updating user stats:', error);
+  //         throw error;
+  //       }
+
+  //       res.json({
+  //         success: true,
+  //         total: finalResults.length,
+  //         results: finalResults,
+  //       });
+  //     } catch (err) {
+  //       res.status(500).json({
+  //         success: false,
+  //         error: err.message,
+  //       });
+  //     }
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // },
+
   getEmails: async (req, res, next) => {
-    try {
-      const websites = req.body.domains;
+  try {
+    const websites = req.body.domains;
 
-      if (!Array.isArray(websites) || websites.length === 0) {
-        return res.status(400).json({
-          success: false,
-          message: "Please provide websites array.",
-        });
-      }
-
-      const BATCH_SIZE = 50;
-      const batches = [];
-
-      for (let i = 0; i < websites.length; i += BATCH_SIZE) {
-        batches.push(websites.slice(i, i + BATCH_SIZE));
-      }
-
-      let finalResults = [];
-
-      try {
-        for (const batch of batches) {
-          console.log(`Processing Batch (${batch.length} websites)...`);
-          const batchResult = await runPython(batch);
-          if (batchResult.results) {
-            finalResults.push(...batchResult.results);
-          }
-        }
-
-        try {
-          const user = await User.findById(req.user.id);
-          if (!user) throw new Error('User not found');
-
-          const validWebsites = websites?.length || 0;
-          const validEmails = finalResults?.filter(item => item.totalEmails > 0).length || 0;
-
-          user.domains = (user.domains || 0) + validWebsites;
-          user.emails = (user.emails || 0) + validEmails;
-
-          await user.save();
-        } catch (error) {
-          console.error('Error updating user stats:', error);
-          throw error;
-        }
-
-        res.json({
-          success: true,
-          total: finalResults.length,
-          results: finalResults,
-        });
-      } catch (err) {
-        res.status(500).json({
-          success: false,
-          error: err.message,
-        });
-      }
-    } catch (error) {
-      next(error);
+    // Validate input
+    if (!Array.isArray(websites) || websites.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide websites array.",
+      });
     }
-  },
 
+    // Get user from database
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "User not found. Please authenticate again.",
+      });
+    }
+
+    // Determine user role and max domain limit
+    const userRole = user.role || 'user';
+    const maxDomains = ROLE_LIMITS[userRole] || 25;
+
+    // Check if domain count exceeds user's role limit
+    if (websites.length > maxDomains) {
+      return res.status(403).json({
+        success: false,
+        message: `Your role (${userRole}) allows a maximum of ${maxDomains} domains per request. You attempted to process ${websites.length} domains.`,
+        limit: maxDomains,
+        role: userRole,
+        attempted: websites.length,
+        allowed: false,
+      });
+    }
+
+    // Process in batches of 50 (or use the smaller of BATCH_SIZE or maxDomains)
+    const BATCH_SIZE = Math.min(50, maxDomains);
+    const batches = [];
+
+    for (let i = 0; i < websites.length; i += BATCH_SIZE) {
+      batches.push(websites.slice(i, i + BATCH_SIZE));
+    }
+
+    let finalResults = [];
+
+    try {
+      // Process each batch
+      for (const batch of batches) {
+        console.log(`Processing Batch (${batch.length} websites)...`);
+        const batchResult = await runPython(batch);
+        if (batchResult.results) {
+          finalResults.push(...batchResult.results);
+        }
+      }
+
+      // Update user statistics
+      try {
+        const validWebsites = websites?.length || 0;
+        const validEmails = finalResults?.filter(item => item.totalEmails > 0).length || 0;
+
+        user.domains = (user.domains || 0) + validWebsites;
+        user.emails = (user.emails || 0) + validEmails;
+
+        await user.save();
+        
+        console.log(`User stats updated: +${validWebsites} domains, +${validEmails} emails`);
+      } catch (error) {
+        console.error('Error updating user stats:', error);
+        // Don't throw here, just log the error
+      }
+
+      // Send success response with metadata
+      res.json({
+        success: true,
+        total: finalResults.length,
+        results: finalResults,
+        metadata: {
+          role: userRole,
+          limit: maxDomains,
+          processed: websites.length,
+          batches: batches.length,
+          timestamp: new Date().toISOString(),
+        }
+      });
+      
+    } catch (err) {
+      console.error('Processing Error:', err);
+      res.status(500).json({
+        success: false,
+        error: err.message,
+        message: 'Error processing domains. Please try again.',
+      });
+    }
+  } catch (error) {
+    console.error('Controller Error:', error);
+    next(error);
+  }
+},
+  // sendEmail: async (req, res, next) => {
+  //   try {
+  //     console.log('Request Body:', req.body);
+
+  //     let {
+  //       fromEmail,
+  //       ccEmail,
+  //       templates: templateIds,
+  //       recipients
+  //     } = req.body.payload;
+
+  //     // ============ VALIDATION ============
+
+  //     // 1. Validate From Email
+  //     if (!fromEmail) {
+  //       return res.status(400).json({
+  //         success: false,
+  //         message: 'From email is required'
+  //       });
+  //     }
+
+  //     const fromEmailResult = cleanAndValidateEmail(fromEmail);
+  //     if (!fromEmailResult || !fromEmailResult.valid) {
+  //       return res.status(400).json({
+  //         success: false,
+  //         message: 'Invalid from email format',
+  //         details: fromEmailResult
+  //       });
+  //     }
+  //     fromEmail = fromEmailResult.email;
+
+  //     // 2. Validate CC Email (if provided)
+  //     if (ccEmail) {
+  //       const ccEmailResult = cleanAndValidateEmail(ccEmail);
+  //       if (!ccEmailResult || !ccEmailResult.valid) {
+  //         return res.status(400).json({
+  //           success: false,
+  //           message: 'Invalid CC email format',
+  //           details: ccEmailResult
+  //         });
+  //       }
+  //       ccEmail = ccEmailResult.email;
+  //     }
+
+  //     // 3. Process and validate recipients
+  //     const recipientResults = processRecipients(recipients);
+
+  //     if (recipientResults.validEmails.length === 0) {
+  //       return res.status(400).json({
+  //         success: false,
+  //         message: 'No valid recipients found. All emails were invalid.',
+  //         invalidEmails: recipientResults.invalidEmails
+  //       });
+  //     }
+
+  //     if (recipientResults.invalidEmails.length > 0) {
+  //       console.log('Invalid emails found:', recipientResults.invalidEmails);
+  //     }
+
+  //     // 4. Validate Templates
+  //     if (!templateIds || !Array.isArray(templateIds) || templateIds.length === 0) {
+  //       return res.status(400).json({
+  //         success: false,
+  //         message: 'At least one template ID is required'
+  //       });
+  //     }
+
+  //     // ============ FETCH TEMPLATES ============
+
+  //     let templates = [];
+  //     try {
+  //       templates = await Template.find({
+  //         _id: { $in: templateIds }
+  //       });
+
+  //       if (templates.length === 0) {
+  //         return res.status(404).json({
+  //           success: false,
+  //           message: 'No templates found with the provided IDs'
+  //         });
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching templates:', error);
+  //       return res.status(500).json({
+  //         success: false,
+  //         message: 'Error fetching templates from database',
+  //         error: error.message
+  //       });
+  //     }
+
+  //     // ============ GET USER APP PASSWORD ============
+
+  //     let user = await User.findOne({_id: req.user.id});
+
+  //     // ============ CREATE TRANSPORTER ============
+
+  //     let transporter;
+  //     try {
+  //       transporter = createTransporter(fromEmail, user.appPassword);
+  //       await transporter.verify();
+  //       console.log('SMTP connection verified successfully');
+  //     } catch (error) {
+  //       console.error('SMTP connection error:', error);
+  //       return res.status(500).json({
+  //         success: false,
+  //         message: 'Failed to connect to email server',
+  //         error: error.message
+  //       });
+  //     }
+
+  //     // ============ DISTRIBUTE TEMPLATES AMONG RECIPIENTS ============
+      
+  //     const validRecipients = recipientResults.validEmails;
+      
+  //     // Use round-robin distribution
+  //     const emailDistribution = distributeTemplates(templates, validRecipients);
+      
+  //     // OR use even distribution (uncomment if preferred)
+  //     // const emailDistribution = distributeTemplatesEvenly(templates, validRecipients);
+
+  //     console.log(`📧 Template Distribution: ${emailDistribution.length} emails to send`);
+  //     console.log(`📋 ${templates.length} templates available`);
+  //     console.log(`👥 ${validRecipients.length} recipients`);
+
+  //     // ============ SEND EMAILS WITH DYNAMIC DELAYS ============
+
+  //     const results = [];
+  //     let successful = 0;
+  //     let failed = 0;
+
+  //     try {
+  //       for (let i = 0; i < emailDistribution.length; i++) {
+  //         const { recipient, template, templateIndex } = emailDistribution[i];
+          
+  //         // Prepare email content for this specific template
+  //         const subject = template.title || 'Email from ' + fromEmail;
+  //         let htmlContent = `<div style="margin-bottom: 20px; padding-bottom: 20px;">`;
+  //         htmlContent += `<h2 style="color: #2563eb; margin-bottom: 10px;">${template.title}</h2>`;
+  //         htmlContent += `<div>${template.content || template.body || ''}</div>`;
+  //         htmlContent += `</div>`;
+
+  //         console.log(`📧 [${i + 1}/${emailDistribution.length}] Sending to ${recipient} using template "${template.title}"...`);
+
+  //         const result = await sendSingleEmail(
+  //           transporter,
+  //           fromEmail,
+  //           recipient,
+  //           ccEmail,
+  //           subject,
+  //           htmlContent
+  //         );
+
+  //         results.push({
+  //           ...result,
+  //           templateUsed: template.title,
+  //           templateId: template._id
+  //         });
+
+  //         if (result.success) {
+  //           successful++;
+  //           console.log(`✅ Email sent to ${recipient} successfully`);
+  //         } else {
+  //           failed++;
+  //           console.log(`❌ Failed to send to ${recipient}: ${result.error}`);
+  //         }
+
+  //         // Add dynamic delay between emails (5-20 seconds)
+  //         // Don't add delay after the last email
+  //         if (i < emailDistribution.length - 1) {
+  //           const delay = getRandomDelay();
+  //           console.log(`⏳ Waiting ${delay/1000} seconds before next email...`);
+  //           await new Promise(resolve => setTimeout(resolve, delay));
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error('Error during email sending process:', error);
+  //       return res.status(500).json({
+  //         success: false,
+  //         message: 'Error during email sending process',
+  //         error: error.message,
+  //         results: results
+  //       });
+  //     }
+
+  //     // ============ EMAIL COUNT UPDATE ============
+
+  //     user.sendEmails = user.sendEmails + recipientResults.totalValid;
+
+  //     await user.save();
+
+  //     // ============ RESPONSE ============
+
+  //     const response = {
+  //       success: true,
+  //       message: `Email sending completed: ${successful} successful, ${failed} failed`,
+  //       stats: {
+  //         totalReceived: recipients ? recipients.length : 0,
+  //         validEmails: recipientResults.totalValid,
+  //         invalidEmails: recipientResults.totalInvalid,
+  //         successful: successful,
+  //         failed: failed,
+  //         templatesUsed: templates.length,
+  //         distributionMethod: 'Round-robin'
+  //       },
+  //       details: {
+  //         fromEmail,
+  //         ccEmail: ccEmail || null,
+  //         templatesUsed: templates.map(t => ({
+  //           id: t._id,
+  //           title: t.title
+  //         })),
+  //         distribution: emailDistribution.map(item => ({
+  //           recipient: item.recipient,
+  //           templateTitle: item.template.title,
+  //           templateId: item.template._id
+  //         })),
+  //         invalidRecipients: recipientResults.invalidEmails.length > 0 ? recipientResults.invalidEmails : undefined
+  //       },
+  //       results: results
+  //     };
+
+  //     console.log('📊 Email sending results:', {
+  //       total: emailDistribution.length,
+  //       successful,
+  //       failed,
+  //       invalidEmails: recipientResults.invalidEmails.length
+  //     });
+
+  //     return res.status(200).json(response);
+
+  //   } catch (error) {
+  //     console.error('Unexpected error in sendEmail:', error);
+  //     return res.status(500).json({
+  //       success: false,
+  //       message: 'An unexpected error occurred',
+  //       error: error.message
+  //     });
+  //   }
+  // }
   sendEmail: async (req, res, next) => {
     try {
       console.log('Request Body:', req.body);
@@ -319,8 +665,53 @@ module.exports = {
         fromEmail,
         ccEmail,
         templates: templateIds,
-        recipients
-      } = req.body.payload;
+        recipients,
+        limit // Add limit parameter from frontend
+      } = req.body.payload || req.body;
+
+      // ============ USER ROLE AND LIMIT VALIDATION ============
+      
+      // Get user from database
+      let user = await User.findOne({_id: req.user.id});
+      if (!user) {
+        return res.status(401).json({
+          success: false,
+          message: 'User not found. Please authenticate again.'
+        });
+      }
+
+      // Define role-based limits
+      const ROLE_LIMITS = {
+        'user': 25,
+        'admin': 35,
+        'superAdmin': 50
+      };
+
+      // Determine user role and max limit
+      const userRole = user.role || 'user';
+      const maxEmails = ROLE_LIMITS[userRole] || 25;
+
+      // Validate recipients count against role limit
+      const recipientResults = processRecipients(recipients);
+      const validRecipients = recipientResults.validEmails;
+
+      // Check if the number of valid recipients exceeds the role limit
+      if (validRecipients.length > maxEmails) {
+        return res.status(403).json({
+          success: false,
+          message: `Your role (${userRole}) allows a maximum of ${maxEmails} emails per batch. You have ${validRecipients.length} valid recipients.`,
+          limit: maxEmails,
+          role: userRole,
+          attempted: validRecipients.length,
+          allowed: false
+        });
+      }
+
+      // Optional: Also check the limit parameter from frontend for consistency
+      if (limit && limit !== maxEmails) {
+        console.warn(`Frontend limit (${limit}) doesn't match backend limit (${maxEmails}) for role ${userRole}`);
+        // We'll use the backend limit anyway for security
+      }
 
       // ============ VALIDATION ============
 
@@ -356,9 +747,8 @@ module.exports = {
       }
 
       // 3. Process and validate recipients
-      const recipientResults = processRecipients(recipients);
-
-      if (recipientResults.validEmails.length === 0) {
+      // (Already done above, but keep for consistency)
+      if (validRecipients.length === 0) {
         return res.status(400).json({
           success: false,
           message: 'No valid recipients found. All emails were invalid.',
@@ -403,7 +793,7 @@ module.exports = {
 
       // ============ GET USER APP PASSWORD ============
 
-      let user = await User.findOne({_id: req.user.id});
+      // User already fetched above
 
       // ============ CREATE TRANSPORTER ============
 
@@ -423,8 +813,6 @@ module.exports = {
 
       // ============ DISTRIBUTE TEMPLATES AMONG RECIPIENTS ============
       
-      const validRecipients = recipientResults.validEmails;
-      
       // Use round-robin distribution
       const emailDistribution = distributeTemplates(templates, validRecipients);
       
@@ -434,6 +822,7 @@ module.exports = {
       console.log(`📧 Template Distribution: ${emailDistribution.length} emails to send`);
       console.log(`📋 ${templates.length} templates available`);
       console.log(`👥 ${validRecipients.length} recipients`);
+      console.log(`🔒 Role: ${userRole}, Limit: ${maxEmails}`);
 
       // ============ SEND EMAILS WITH DYNAMIC DELAYS ============
 
@@ -497,8 +886,7 @@ module.exports = {
 
       // ============ EMAIL COUNT UPDATE ============
 
-      user.sendEmails = user.sendEmails + recipientResults.totalValid;
-
+      user.sendEmails = (user.sendEmails || 0) + recipientResults.totalValid;
       await user.save();
 
       // ============ RESPONSE ============
@@ -513,7 +901,11 @@ module.exports = {
           successful: successful,
           failed: failed,
           templatesUsed: templates.length,
-          distributionMethod: 'Round-robin'
+          distributionMethod: 'Round-robin',
+          // Add role and limit info
+          userRole: userRole,
+          maxLimit: maxEmails,
+          limitUsed: emailDistribution.length
         },
         details: {
           fromEmail,
@@ -536,7 +928,9 @@ module.exports = {
         total: emailDistribution.length,
         successful,
         failed,
-        invalidEmails: recipientResults.invalidEmails.length
+        invalidEmails: recipientResults.invalidEmails.length,
+        role: userRole,
+        limit: maxEmails
       });
 
       return res.status(200).json(response);
