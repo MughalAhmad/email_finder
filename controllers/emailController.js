@@ -835,9 +835,9 @@ module.exports = {
           const { recipient, template, templateIndex } = emailDistribution[i];
           
           // Prepare email content for this specific template
-          const subject = template.title || 'Email from ' + fromEmail;
+          const subject = template.subject || 'Email from ' + fromEmail;
           let htmlContent = `<div style="margin-bottom: 20px; padding-bottom: 20px;">`;
-          htmlContent += `<h2 style="color: #2563eb; margin-bottom: 10px;">${template.title}</h2>`;
+          // htmlContent += `<h2 style="color: #2563eb; margin-bottom: 10px;">${template.title}</h2>`;
           htmlContent += `<div>${template.content || template.body || ''}</div>`;
           htmlContent += `</div>`;
 
