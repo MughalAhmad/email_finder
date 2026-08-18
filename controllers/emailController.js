@@ -15,9 +15,14 @@ const ROLE_LIMITS = {
 function runPython(websites) {
   return new Promise((resolve, reject) => {
     const pythonScriptPath = path.join(__dirname, "../python/app.py");
+    // console.log("Running Python script:", pythonScriptPath);
+    const pythonExecutable = "/opt/alt/python311/bin/python3.11";
+
+    console.log("Python executable:", pythonExecutable);
     console.log("Running Python script:", pythonScriptPath);
 
-    const python = spawn("python", [pythonScriptPath]);
+    // const python = spawn("python", [pythonScriptPath]);
+    const python = spawn(pythonExecutable, [pythonScriptPath]);
     let output = "";
     let errorOutput = "";
 
