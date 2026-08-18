@@ -22,7 +22,17 @@ function runPython(websites) {
     console.log("Running Python script:", pythonScriptPath);
 
     // const python = spawn("python", [pythonScriptPath]);
-    const python = spawn(pythonExecutable, [pythonScriptPath]);
+    // const python = spawn(pythonExecutable, [pythonScriptPath]);
+    const python = spawn(
+      "/opt/alt/python311/bin/python3.11",
+      [pythonScriptPath],
+      {
+      env: {
+        ...process.env,
+        PYTHONPATH: "/home/u858347123/.local/lib/python3.11/site-packages"
+      }
+      }
+      );
     let output = "";
     let errorOutput = "";
 
